@@ -9,7 +9,7 @@ admin.site.register(Rama)
 admin.site.register(Compania)
 
 @admin.register(Cliente)
-class ClienteAdmin(ImportExportModelAdmin):
+class ClienteAdmin(admin.ModelAdmin):
     list_display=('documento','nombres','correo_electronico','telefono','polizas_activas',)
     list_display_links=('documento','nombres',)
     exclude=('notificaciones','polizas_activas',)
@@ -44,7 +44,7 @@ class ClienteAdmin(ImportExportModelAdmin):
         return formateo
 
 @admin.register(Bien)
-class BienAdmin(ImportExportModelAdmin):
+class BienAdmin(admin.ModelAdmin):
     exclude=('fecha_de_vencimiento','estado',)
     list_display=('titular','rama','Bien_Asegurado','estado_De_poliza','vencimiento_De_poliza')
     list_display_links=('rama','titular',)
@@ -82,7 +82,7 @@ class BienAdmin(ImportExportModelAdmin):
         return formateo
 
 
-class CoberturaAdmin(ImportExportModelAdmin):
+class CoberturaAdmin(admin.ModelAdmin):
     list_display=('compania','Categoria','Tipo','plazo_en_dias',)
 
     def Categoria(self,obj):
