@@ -1,14 +1,15 @@
 from django.contrib import admin
 from .models import *
-
+from import_export.admin import ImportExportModelAdmin
 # Register your models here.
 
 #Estos modelos los uso yo, asi que no hace falta la forma de tabla.
 admin.site.register(Formadepago)
 admin.site.register(Rama)
+admin.site.register(Compania)
 
 @admin.register(Cliente)
-class ClienteAdmin(admin.ModelAdmin):
+class ClienteAdmin(ImportExportModelAdmin):
     list_display=('documento','nombres','correo_electronico','telefono','polizas_activas',)
     list_display_links=('documento','nombres',)
     exclude=('notificaciones','polizas_activas',)
@@ -43,7 +44,7 @@ class ClienteAdmin(admin.ModelAdmin):
         return formateo
 
 @admin.register(Bien)
-class BienAdmin(admin.ModelAdmin):
+class BienAdmin(ImportExportModelAdmin):
     exclude=('fecha_de_vencimiento','estado',)
     list_display=('titular','rama','Bien_Asegurado','estado_De_poliza','vencimiento_De_poliza')
     list_display_links=('rama','titular',)
@@ -81,7 +82,7 @@ class BienAdmin(admin.ModelAdmin):
         return formateo
 
 
-class CoberturaAdmin(admin.ModelAdmin):
+class CoberturaAdmin(ImportExportModelAdmin):
     list_display=('compania','Categoria','Tipo','plazo_en_dias',)
 
     def Categoria(self,obj):
